@@ -32,7 +32,400 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+/*User Login*/
+
+
+
+.formContainer,
+.formContainerSignup {
+  text-align: center;
+  width: 100%;
+}
+
+.formContainer {
+  margin: 80px 0 0 0;
+}
+
+.formContainerSignup {
+  margin: 40px 0 0 0;
+}
+
+.formCard,
+.formCardSignup {
+  width: 50%;
+  margin: 0 0 0 25%;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+}
+
+.formCard {
+  padding: 50px 0 50px 0;
+}
+
+.formCardSignup {
+  padding: 10px 0;
+}
+
+.titleContainer,
+.titleContainerSignup {
+  margin: 20px 0 20px 0;
+}
+
+.titleContainer h1,
+.titleContainerSignup h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+  color: #11151C;
+}
+
+.emailContainer,
+.passwordContainer,
+.firstNameContainer,
+.lastNameContainer,
+.emailContainerSignup,
+.passwordContainerSignup {
+  padding: 0 0 35px 0;
+}
+
+.emailContainer input,
+.passwordContainer input,
+.firstNameContainer input,
+.lastNameContainer input,
+.emailContainerSignup input,
+.passwordContainerSignup input {
+  width: 80%;
+  background: rgba(196, 196, 196, 0.03);
+  border: 1.5px solid #C4C4C4;
+  border-radius: 4px;
+}
+
+.emailContainer input[type=email] {
+  padding: 5px 10px 5px 10px;
+}
+
+.passwordContainer input[type=password] {
+  padding: 5px 10px 5px 10px;
+}
+
+.firstNameContainer input[type=text] {
+  padding: 5px 10px;
+}
+
+.lastNameContainer input[type=text] {
+  padding: 5px 10px;
+}
+
+.emailContainerSignup input[type=email] {
+  padding: 5px 10px;
+}
+
+.passwordContainerSignup input[type=password] {
+  padding: 5px 10px;
+}
+
+::placeholder {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 27px;
+  color: #C4C4C4;
+
+}
+
+.submitContainer {
+  margin: 0 0 10px 0;
+}
+
+.btn-1 {
+  display: inline-block;
+  width: 80%;
+  background-color: #D92027;
+  border-radius: 8px;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: #DFEFFF;
+  padding: 5px 10px 5px 10px;
+  outline: none;
+
+}
+
+.breaklineContainer {
+  display: flex;
+  justify-content: center;
+
+}
+
+.breakline,
+.breaklineSignup {
+  width: 80%;
+  border: 0.5px solid rgba(26, 26, 26, 0.8);
+}
+
+.breakline {
+  margin: 40px 0 5px 0;
+}
+
+.breaklineSignup {
+  margin: 20px 0 0 0;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-evenly;
+
+
+}
+
+.cantLogin {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #777777;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #1A1A1A;
+  margin: 10px 0 0 0;
+  border-radius: 50%;
+
+}
+
+.canSignup {
+  font-style: none;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+  color: #27496D;
+}
+
+
+.dashContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin: -20px 0 0 0;
+}
+
+.firstDash,
+.secondDash,
+.thirdDash,
+.fourthDash,
+.fifthDash {
+  width: 60px;
+  border: 2px solid #B3B3B3;
+}
+
+.passwordInfoContainer p {
+  height: 16px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+  color: #11151C;
+}
+
+.termsContainer p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #11151C;
+}
+
+.already {
+  font-style: normal;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.alreadyLogin {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Footer*/
+.footerContainer,
+.footerContainerSignup {
+  display: flex;
+  justify-content: center;
+}
+
+.footerContainer h4,
+.footerContainerSignup h4 {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1A1A1A;
+  padding: 0 55px;
+}
+
+.footerContainer h4 {
+  margin: 60px 0 0 0;
+}
+
+.footerContainerSignup h4 {
+  margin: 20px 0 20px 0;
+}
+
+/*Media Qeury*/
+
+@media only screen and (max-width: 913px) and (min-width: 628px) {
+
+  .footerContainer h4,
+  .footerContainerSignup h4 {
+    font-size: 13px;
+    padding: 0 20px;
+  }
+
+  .formCard,
+  .formCardSignup {
+    width: 70%;
+    margin: 0 0 0 15%;
+  }
+}
+
+@media only screen and (max-width: 627px) and (min-width: 530px) {
+
+  .footerContainer h4,
+  .footerContainerSignup h4 {
+    font-size: 13px;
+    padding: 0 20px;
+  }
+
+  .formCard,
+  .formCardSignup {
+    width: 70%;
+    margin: 0 0 0 15%;
+  }
+
+}
+
+@media only screen and (max-width: 529px) and (min-width:400px) {
+  .formContainer {
+    margin: 40px 0 0 0;
+  }
+
+  .formContainerSignup {
+    margin: 20px 0 0 0;
+  }
+
+
+  .formCard,
+  .formCardSignup {
+    width: 100%;
+    margin: 0 0 0 0;
+  }
+
+  .footerContainer h4,
+  .footerContainerSignup h4 {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+
+  .firstNameContainer,
+  .lastNameContainer,
+  .emailContainerSignup,
+  .passwordContainerSignup {
+    padding: 0 0 20px 0;
+  }
+
+
+  .dashContainer {
+    margin: -10px 0 0 0;
+  }
+
+
+  .firstDash,
+  .secondDash,
+  .thirdDash,
+  .fourthDash,
+  .fifthDash {
+    width: 40px;
+    border: 2px solid #B3B3B3;
+  }
+
+}
+
+@media only screen and (max-width: 399px) and (min-width:0) {
+
+  .formContainerSignup {
+    margin: 20px 0 0 0;
+  }
+
+  .footerContainer h4,
+  .footerContainerSignup h4 {
+    font-size: 11px;
+    padding: 0 5px;
+  }
+
+  .formCard,
+  .formCardSignup {
+    width: 100%;
+    margin: 0 0 0 0;
+  }
+
+  .formContainer {
+    margin: 40px 0 0 0;
+  }
+
+  .footerContainer h4 {
+    margin: 40px 0 0 0;
+  }
+
+  .footerContainerSignup h4 {
+    margin: 10px 0 10px 0;
+  }
+
+  .titleContainerSignup {
+    margin: 10px 0 10px 0;
+  }
+
+  .firstNameContainer,
+  .lastNameContainer,
+  .emailContainerSignup,
+  .passwordContainerSignup {
+    padding: 0 0 15px 0;
+  }
+
+  .dashContainer {
+    margin: 0 0 0 0;
+  }
+
+  .passwordInfoContainer p {
+
+    font-size: 16px;
+    line-height: 22px;
+
+  }
+
+  .termsContainer p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #11151C;
+  }
+
+  .firstDash,
+  .secondDash,
+  .thirdDash,
+  .fourthDash,
+  .fifthDash {
+    width: 40px;
+    border: 1px solid #B3B3B3;
   }
 }
