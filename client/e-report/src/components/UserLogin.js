@@ -2,7 +2,6 @@ import React from 'react';
 import logo from '../../src/Logo.svg';
 import { Link } from 'react-router-dom';
 import UserLoginForm from './UserLoginForm';
-import UserLoginFooter from "./UserLoginFooter";
 
 function UserLogin() {
   return (
@@ -18,7 +17,24 @@ function UserLogin() {
       </nav>
 
       <UserLoginForm />
-      <UserLoginFooter />
+      
+      <div className="footerContainer">
+        <div>
+          <Link> <h4>About</h4> </Link>
+        </div>
+        <div>
+          <Link><h4>Help</h4> </Link>
+        </div>
+        <div>
+          <Link> <h4>Developers</h4> </Link>
+        </div>
+        <div>
+          <Link><h4>Privacy Policy</h4></Link>
+        </div>
+        <div>
+          <Link><h4>Terms of Service</h4></Link>
+        </div>
+      </div>
     </div>
   );
 }
