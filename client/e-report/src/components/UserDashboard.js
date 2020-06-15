@@ -6,15 +6,16 @@ import "./UserDashboard.css";
 
 const Cards = ({ info, index , deleteReport}) =>
     <div className="todo">
-        <div className="card" style={{ width: "18rem" }}>
-       
+        <div className="card" style={{width:"20rem"}}>
+            <div className="card-banner"></div>
             <div className="card-body">
+                
                 <h5 className="card-title font-weight-bold text-uppercase form-font">{info.category} at {info.address}</h5>
                 <p className="card-text"> {info.details} </p>
                 <img className="card-img-top" src={info.imageUrl} alt="" style={{width:"200px", height:"150px"}}/>
                 <div className="edit-delete">
-                <button ><i className="fa fa-pencil-square-o fa-2x"></i></button>
-                <button onClick={() => deleteReport(index)}> <i className="fa fa-trash fa-2x"></i></button>
+                <button ><i className="fa fa-pencil-square-o fa-2x edit"></i></button>
+                <button onClick={() => deleteReport(index)}> <i className="fa fa-trash fa-2x delete"></i></button>
                 </div>
                 
             </div>
@@ -142,7 +143,7 @@ function UserDashboard() {
       };
 
     return (
-        <div className="user-dashboard"> 
+        <div className="user-dashboard "> 
             <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
                 <img src={logo} alt="Logo" />
                 <div style={{ display: "flex" }}>
@@ -154,6 +155,7 @@ function UserDashboard() {
                 </div>
             </nav>
 
+            
             <div className="todo-list">
                 {reports.map((info, index) => (
                     <Cards
@@ -164,9 +166,9 @@ function UserDashboard() {
                     />
                 ))}
                 <ReportForm addReport={addReport} />
+            
+
             </div>
-
-
         </div>
     );
 
