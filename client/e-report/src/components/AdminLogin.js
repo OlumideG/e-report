@@ -1,53 +1,16 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import logo from '../../src/Logo.svg';
 import { Link } from 'react-router-dom';
-import { toast } from "react-toastify";
 
 
 
 
 
-function AdminLogin({ setAuth }) {
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: ""
-  });
 
-  const { email, password } = inputs;
-
-  const onChange = e =>
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
-
-  const onSubmitForm = async e => {
-    e.preventDefault();
-    try {
-      const body = { email, password };
-      const response = await fetch(
-        "http://localhost:3000/auth/adminlogin",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
-
-      const parseRes = await response.json();
-
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
-        toast.success("Logged in Successfully");
-      } else {
-        setAuth(false);
-        toast.error(parseRes);
-      }
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+function AdminLogin() {
+  
+  
   return (
     <div style={{ fontFamily: "Open Sans" }}>
       <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
@@ -59,14 +22,14 @@ function AdminLogin({ setAuth }) {
 
 
       <div className="formContainer">
-        <form onSubmit={onSubmitForm} className="formCard">
+        <form  className="formCard">
 
           <div className="titleContainer">
             <h1>Admin Access only<i className="fa fa-lock fa-2x space-icon" aria-hidden="true"></i></h1>
           </div>
 
           <div className="emailContainer">
-            <input type={'email'} name='email'  value={email} placeholder='Enter email' onChange={e => onChange(e)}/>
+            <input type={'email'} name='email'   placeholder='Enter email' />
           </div>
 
           <div className="passwordContainer">
@@ -74,7 +37,7 @@ function AdminLogin({ setAuth }) {
               type="password"
               name="password"
               placeholder={"Enter password"}
-              onChange={e => onChange(e)}
+              
             />
 
           </div>

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from '../../src/Logo.svg';
 import { Modal } from "react-bootstrap";
 import "./UserDashboard.css";
-import { toast } from "react-toastify";
+
 
 
 
@@ -123,54 +123,9 @@ function ReportForm({ addReport }) {
 
 
 
-function UserDashboard({ setAuth }) {
+function UserDashboard() {
 
-
-
-    const [name, setName] = useState("");
-
-    const getProfile = async () => {
-        try {
-            const res = await fetch("http://localhost:3000/dashboard/home", {
-                method: "POST",
-                headers: { jwt_token: localStorage.token }
-            });
-
-            const parseData = await res.json();
-            setName(parseData.lastname);
-            setReports(parseData);
-            console.log(parseData)
-        } catch (err) {
-            console.error(err.message);
-        }
-    };
-
-    const logout = async e => {
-        e.preventDefault();
-        try {
-            localStorage.removeItem("token");
-            setAuth(false);
-            toast.success("Logout successfully");
-        } catch (err) {
-            console.error(err.message);
-        }
-    };
-
-    useEffect(() => {
-        getProfile();
-        // getDbReport();
-
-
-    }, []);
-
-
-
-
-    const [dbReports, setDbReports] = useState([])
-
-
-
-    const [reports, setReports] = useState([
+ const [reports, setReports] = useState([
         {
             category: "road accident",
             address: "Ilorin",
@@ -187,42 +142,7 @@ function UserDashboard({ setAuth }) {
 
     ])
 
-
-
-    // useEffect(() => {
-        // GET request using fetch inside useEffect React hook
-        // const { user_id } = req.body
-        // fetch(`http://localhost:3000/home/${user_id}`)
-        //     .then(response => response.json())
-        //     .then(data => console.log(data));
-
-
-
-        // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    // }, []);
-
-    // const getDbReport = async () => {
-    //     try {
-    //         const reports = await fetch('http://localhost:3000/home', {
-    //             method: 'GET',
-    //             headers: {'Content-Type': 'application/json'},
-    //             body: JSON.stringify({
-    //              details: reports.details,
-    //              address:reports.address,
-    //              category:reports.category,
-    //              imageUrl:reports.imageUrl
-    //             })
-    //           })
-    //         // ("http://localhost:3000/home")
-    //         const jsonData = await reports.json()
-    //         setDbReports(jsonData)          
-    //     } catch (error) {
-    //         console.log(error)
-    //     } 
-    // }
-
-
-    const addReport = report => {
+  const addReport = report => {
         const newReports = [...reports, report];
         setReports(newReports)
     }
@@ -235,12 +155,7 @@ function UserDashboard({ setAuth }) {
     };
 
 
-    //   useEffect(() => {
-    //     getDbReport()
-    // }, [])
-
-
-    return (
+  return (
         <div className="user-dashboard">
             <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
                 <img src={logo} alt="Logo" />
@@ -251,12 +166,12 @@ function UserDashboard({ setAuth }) {
                     </form>
                     
                     <i className="fa fa-user fa-3x" style={{ marginLeft: "10px" }}></i>
-                    <button onClick={e => logout(e)} className="btn btn-primary">
+                    <button className="btn btn-primary">
                         Logout
                     </button>
                 </div>
             </nav>
-            <h6>Welcome {name}</h6>
+            <h6>Welcome </h6>
 
 
 

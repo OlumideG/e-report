@@ -1,56 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import logo from '../../src/Logo.svg';
 import { Link } from 'react-router-dom';
-import { toast } from "react-toastify";
-
-
-function UserSignup({ setAuth }) {
-
-
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-    firstname: "",
-    lastname:""
-  });
-
-  const { email, password, firstname, lastname } = inputs;
-
-  const onChange = e =>
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
-
-  const onSubmitForm = async e => {
-    e.preventDefault();
-    try {
-      const body = { email, password, firstname, lastname };
-      const response = await fetch(
-        "http://localhost:3000/auth/usersignup",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
-      const parseRes = await response.json();
-
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
-        toast.success("Register Successfully");
-      } else {
-        setAuth(false);
-        toast.error(parseRes);
-      }
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
 
 
-    return (
+function UserSignup() {
+
+ return (
         <div style={{fontFamily:"Open Sans", fontStyle: "normal",fontWeight: "normal"}}>
             <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
                 <img src={logo} alt="Logo" />
@@ -59,42 +15,42 @@ function UserSignup({ setAuth }) {
             </nav>
 
             <div className="formContainerSignup">
-      <form onSubmit={onSubmitForm}  className="formCardSignup">
+      <form   className="formCardSignup">
         <div className="titleContainerSignup">
           <h1>Sign up for your Account</h1>
         </div>
         <div className="emailContainerSignup">
           <input type='text'
            name='email'
-           value={email}
+        
             placeholder='Enter email' 
-             onChange={e => onChange(e)}
+            
              />
         </div>
         <div className="firstNameContainer">
           <input type="text" 
           name="firstname"
-          value={firstname}
+      
            placeholder={"Enter First Name"} 
-            onChange={e => onChange(e)}
+           
             />
         </div>
         <div className="lastNameContainer">
           <input
             type="text"
             name="lastname"
-            value={lastname}
+            
             placeholder={"Enter Last Name"}
-            onChange={e => onChange(e)}
+           
           />
         </div>
         <div className="passwordContainerSignup">
           <input
             type="password"
             name="password"
-            value={password}
+          
             placeholder={"Enter password"}
-            onChange={e => onChange(e)}
+          
           />
 
         </div>
