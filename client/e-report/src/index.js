@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 // import './assets/main.css';
 import 'tachyons';
+// import 'semantic-ui-css/semantic.min.css'
 
 
 ReactDOM.render(

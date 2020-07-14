@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import logo from '../../src/Logo.svg';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
+import Particles from 'react-particles-js';
+import  {particlesOptions} from "./particles";
 
 
 
 
-function AdminLogin({ setAuth }) {
+function AdminLogin({ setAdminAuth }) {
+
+  
+  let history = useHistory();
+  function landingPage() {
+    history.push("/");
+    };
+
   const [inputs, setInputs] = useState({
     email: "",
     password: ""
@@ -36,10 +45,10 @@ function AdminLogin({ setAuth }) {
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
+        setAdminAuth(true);
         toast.success("Logged in Successfully");
       } else {
-        setAuth(false);
+        setAdminAuth(false);
         toast.error(parseRes);
       }
     } catch (err) {
@@ -48,8 +57,9 @@ function AdminLogin({ setAuth }) {
   };
   return (
     <div style={{ fontFamily: "Open Sans" }}>
-      <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
-        <img src={logo} alt="Logo" />
+      {/* <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}> */}
+      <nav className="navbar navbar-light" style={{ backgroundColor: "#122233" }}>
+        <img src={logo} alt="Logo" onClick={landingPage} />
         <Link to="/usersignup" style={{ color: "white", fontSize: "25px" }}>Create a Reports account with us </Link>
         <Link to="/userlogin" style={{ color: "white", fontSize: "25px" }}>User Login</Link>
       </nav>
@@ -86,7 +96,9 @@ function AdminLogin({ setAuth }) {
         </form>
       </div>
 
-
+      <Particles className='particles'
+              params={particlesOptions}
+            />
 
     </div>
   );

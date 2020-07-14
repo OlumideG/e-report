@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import logo from '../../src/Logo.svg';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
 
 
+
 function UserSignup({ setAuth }) {
+
+  let history = useHistory();
+  function landingPage() {
+    history.push("/");
+    };
 
 
   const [inputs, setInputs] = useState({
@@ -53,7 +59,7 @@ function UserSignup({ setAuth }) {
     return (
         <div style={{fontFamily:"Open Sans", fontStyle: "normal",fontWeight: "normal"}}>
             <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
-                <img src={logo} alt="Logo" />
+                <img src={logo} alt="Logo"  onClick={landingPage}/>
                 <Link to="/userlogin" style={{ color:"white", fontSize:"25px" }}>Log in</Link>
                 <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>Admin Login</Link>
             </nav>
@@ -64,7 +70,7 @@ function UserSignup({ setAuth }) {
           <h1>Sign up for your Account</h1>
         </div>
         <div className="emailContainerSignup">
-          <input type='text'
+          <input type='email'
            name='email'
            value={email}
             placeholder='Enter email' 
@@ -98,7 +104,7 @@ function UserSignup({ setAuth }) {
           />
 
         </div>
-        <button className="btn-1"> Create Account </button>
+        {/* <button className="btn-1"> Create Account </button> */}
         <div className="dashContainer">
           <div className="firstDash"></div>
           <div className="secondDash"></div>
@@ -116,13 +122,13 @@ function UserSignup({ setAuth }) {
           </p>
         </div>
         <div className="submitContainer">
-          {/* <button className="btn-1"> Create Account </button> */}
+          <button className="btn-1"> Create Account </button>
           <div className="breaklineContainer">
             <div className="breaklineSignup"></div>
           </div>
         </div>
         <div className="existingAccount">
-          <p><span className="already">Already have an Account?</span> <Link to="/"><span className="alreadyLogin">Login</span></Link></p>
+          <p><span className="already">Already have an Account?</span> <Link to="/userlogin"><span className="alreadyLogin">Login</span></Link></p>
         </div>
       </form>
 

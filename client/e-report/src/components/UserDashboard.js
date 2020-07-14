@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import logo from '../../src/Logo.svg';
 import { Modal } from "react-bootstrap";
 import "./UserDashboard.css";
 import { toast } from "react-toastify";
+import decode from 'jwt-decode';
 
 
 
@@ -13,7 +15,7 @@ const Cards = ({ info, index, deleteReport }) =>
             <div className="card-body">
                 <h5 className="card-title font-weight-bold text-uppercase form-font">{info.category} at {info.address}</h5>
                 <p className="card-text"> {info.details} </p>
-                <img className="card-img-top" src={info.imageUrl} alt="" style={{ width: "200px", height: "150px" }} />
+                <img className="card-img-top" src={info.imageurl} alt="" style={{ width: "200px", height: "150px" }} />
                 <div className="edit-delete">
                     <button ><i className="fa fa-pencil-square-o fa-2x"></i></button>
                     <button onClick={() => deleteReport(index)}> <i className="fa fa-trash fa-2x"></i></button>
@@ -29,7 +31,8 @@ function ReportForm({ addReport }) {
         category: "",
         address: "",
         details: "",
-        imageUrl: ""
+        imageurl: "",
+        user_id:"",
     })
 
 
@@ -47,45 +50,56 @@ function ReportForm({ addReport }) {
         )
         const file = await res.json()
         console.log(file.secure_url)
-        setReport({ ...report, imageUrl: file.secure_url })
+        setReport({ ...report, imageurl: file.secure_url })
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const { user } = decode(localStorage.token)
         if (report.address.length === 0 && report.category.length === 0) {
             console.log("PLEASE FILL THE MESSAGE BOX")
-        } else if (report.imageUrl.length === 0) {
+        } else if (report.imageurl.length === 0) {
             alert("WAIT!! PICTURE IS LOADING INTO OUR DATABASE")
         } else {
             try {
-               
+                 const reportPosting = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        category: report.category,
+                        address: report.address,
+                        details: report.details,
+                        imageUrl: report.imageurl,
+                        user_id: user
+                    })
+                };
+                fetch('http://localhost:3000/dashboard/home', reportPosting)
+                    .then(response => response.json())
+                    .then(data => setReport(data));
 
-
-
+                console.log(user);
                 console.log(report)
                 addReport(report)
                 setReport({
                     category: "",
                     address: "",
                     details: "",
-                    imageUrl: ""
+                    imageurl: "",
+                    user_id:""
                 })
                 setButton(false)
+
             } catch (error) {
                 console.log(console.error()
                 )
             }
-
-
 
         }
 
     }
 
 
-
-
-    return (
+  return (
         <div>
             <div><button onClick={() => setButton(true)} className="modal-button"><i className=" space-icon fa fa-plus"></i>Add new report</button></div>
             <form className=" form-font form-inline" action="">
@@ -124,31 +138,11 @@ function ReportForm({ addReport }) {
 
 
 function UserDashboard({ setAuth }) {
-
-
-
-    const [name, setName] = useState("");
-
-    const getProfile = async () => {
-        try {
-            const res = await fetch("http://localhost:3000/dashboard/home", {
-                method: "POST",
-                headers: { jwt_token: localStorage.token }
-            });
-
-            const parseData = await res.json();
-            setName(parseData.lastname);
-            setReports(parseData);
-            console.log(parseData)
-        } catch (err) {
-            console.error(err.message);
-        }
-    };
-
     const logout = async e => {
         e.preventDefault();
         try {
             localStorage.removeItem("token");
+            // localStorage.removeItem("user");
             setAuth(false);
             toast.success("Logout successfully");
         } catch (err) {
@@ -156,18 +150,30 @@ function UserDashboard({ setAuth }) {
         }
     };
 
-    useEffect(() => {
-        getProfile();
-        // getDbReport();
+   
+    let history = useHistory();
+   function landingPage() {
+    history.push("/");
+    };
+
+    useEffect(() => {   
+        const { user } = decode(localStorage.token)
+        console.log(user)
+
+        fetch(`http://localhost:3000/dashboard/home/${user}`)
+        // fetch(`http://localhost:3000/dashboard/home/`)
+        .then(res => res.json())
+        .then(result => { setReports(result)
+          
+          console.log(result)
+        })
+        .catch(err => {
+          console.log(err.message);
+  
+        })
 
 
     }, []);
-
-
-
-
-    const [dbReports, setDbReports] = useState([])
-
 
 
     const [reports, setReports] = useState([
@@ -188,40 +194,6 @@ function UserDashboard({ setAuth }) {
     ])
 
 
-
-    // useEffect(() => {
-        // GET request using fetch inside useEffect React hook
-        // const { user_id } = req.body
-        // fetch(`http://localhost:3000/home/${user_id}`)
-        //     .then(response => response.json())
-        //     .then(data => console.log(data));
-
-
-
-        // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    // }, []);
-
-    // const getDbReport = async () => {
-    //     try {
-    //         const reports = await fetch('http://localhost:3000/home', {
-    //             method: 'GET',
-    //             headers: {'Content-Type': 'application/json'},
-    //             body: JSON.stringify({
-    //              details: reports.details,
-    //              address:reports.address,
-    //              category:reports.category,
-    //              imageUrl:reports.imageUrl
-    //             })
-    //           })
-    //         // ("http://localhost:3000/home")
-    //         const jsonData = await reports.json()
-    //         setDbReports(jsonData)          
-    //     } catch (error) {
-    //         console.log(error)
-    //     } 
-    // }
-
-
     const addReport = report => {
         const newReports = [...reports, report];
         setReports(newReports)
@@ -235,15 +207,11 @@ function UserDashboard({ setAuth }) {
     };
 
 
-    //   useEffect(() => {
-    //     getDbReport()
-    // }, [])
-
 
     return (
         <div className="user-dashboard">
             <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
-                <img src={logo} alt="Logo" />
+                <img src={logo} alt="Logo" onClick={landingPage}/>
                 <div style={{ display: "flex" }}>
                     <form className="form-inline my-2 my-lg-0">
                         <input className="form-control mr-sm-2" type="search" placeholder="Search" />
@@ -251,12 +219,12 @@ function UserDashboard({ setAuth }) {
                     </form>
                     
                     <i className="fa fa-user fa-3x" style={{ marginLeft: "10px" }}></i>
-                    <button onClick={e => logout(e)} className="btn btn-primary">
+                    <button onClick={e => logout(e)} className="btn btn-danger">
                         Logout
                     </button>
                 </div>
             </nav>
-            <h6>Welcome {name}</h6>
+            {/* <h6>Welcome {name}</h6> */}
 
 
 
@@ -275,8 +243,6 @@ function UserDashboard({ setAuth }) {
 
         </div>
     );
-
-
 }
 export default UserDashboard;
 

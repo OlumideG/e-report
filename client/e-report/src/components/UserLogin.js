@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import logo from '../../src/Logo.svg';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
 
 function UserLogin({ setAuth }) {
+
+  let history = useHistory();
+  function landingPage() {
+    history.push("/");
+    };
+
+
   const [inputs, setInputs] = useState({
     email: "",
     password: ""
@@ -33,6 +40,7 @@ function UserLogin({ setAuth }) {
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
+        // localStorage.setItem("user", parseRes.payload["user"])
         setAuth(true);
         toast.success("Logged in Successfully");
       } else {
@@ -46,7 +54,7 @@ function UserLogin({ setAuth }) {
   return (
     <div style={{ fontFamily: "Open Sans" }}>
       <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" onClick={landingPage} />
         <Link to="/usersignup" style={{ color: "white", fontSize: "25px" }}>Sign up</Link>
         <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>Admin Login</Link>
       </nav>
@@ -82,7 +90,7 @@ function UserLogin({ setAuth }) {
           <div className="formFooter">
             <div><Link to="/" className="cantLogin">Can't Log in?</Link></div>
             <div className="dot"> </div>
-            <div><Link to="/" className="canSignup">Sign up</Link></div>
+            <div><Link to="/usersignup" className="canSignup">Sign up</Link></div>
           </div>
         </form>
       </div>
