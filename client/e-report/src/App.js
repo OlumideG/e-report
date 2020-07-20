@@ -6,6 +6,7 @@ import AdminLogin from "./components/AdminLogin";
 import UserDashboard from "./components/UserDashboard";
 import AdminDashboard from "./components/AdminDashboard";
 import LandingPage from "./components/LandingPage";
+import Welcome from "./components/Welcome";
 import NoMatchPage from "./components/NoMatchPage";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -21,8 +22,7 @@ function App() {
       const res = await fetch("http://localhost:3000/auth/verify", {
         method: "POST",
         headers: {
-          jwt_token: localStorage.token,
-          user_id: localStorage.user_id
+          jwt_token: localStorage.token
         }
       });
 
@@ -44,9 +44,9 @@ function App() {
         }
       });
 
-      const parseRes = await res.json();
+      const parseResp = await res.json();
 
-      parseRes === true ? setIsAdminAuth(true) : setIsAdminAuth(false);
+      parseResp === true ? setIsAdminAuth(true) : setIsAdminAuth(false);
     } catch (err) {
       console.error(err.message);
     }
@@ -77,6 +77,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={LandingPage} />
+        {/* <Route path="/welcome" component={Welcome} /> */}
         <Route
           exact
           path="/userlogin"
@@ -102,7 +103,7 @@ function App() {
         />
 
 
-        <Route
+         <Route
           exact
           path="/usersignup"
           render={props =>
@@ -112,7 +113,34 @@ function App() {
                 <Redirect to="/userdashboard" />
               )
           }
-        />
+        /> 
+
+{/* 
+       <Route
+          exact
+          path="/usersignup"
+          render={props =>
+            !isAuthenticated ? (
+              <UserSignup {...props} setAuth={setAuth} />
+            ) : (
+                <Redirect to="/userlogin" />
+              )
+          }
+        />  */}
+
+      {/* <Route
+          exact
+          path="/welcome"
+          render={props =>
+            !isAuthenticated ? (
+              <Welcome {...props} setAuth={setAuth} />
+            ) : (
+                <Redirect to="/userdashboard" />
+              )
+          }
+        /> */}
+
+
         <Route
           exact
           path="/userdashboard"

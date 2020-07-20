@@ -1,6 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 
+.latestContainer{
+  margin-left: 400px;
+}
+
+/* sidebar */
+.sidebar{
+  height:100%;
+  width:160px;
+  background-color: grey;
+}
+
+.sidebar-list{
+  width: 200px;
+  border:300px;
+}
+
+
+
+
+
+
 /* landing page  */
 
 body {
@@ -346,6 +367,7 @@ background-color: #27496D;
   }
 
 }
+
 
 @media only screen and (max-width: 399px) and (min-width:0) {
 

@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const reportRoute = require('./routes/reportRoute');
-const auth = require('./routes/auth')
+const auth = require('./routes/auth');
+const userInfo = require('./routes/userInfo');
 
 
 app.use(express.json());
@@ -14,8 +15,9 @@ app.use(bodyParser.json());
 
 app.use(morgan("tiny"));
 
-app.use('/auth', auth)
-app.use('/dashboard', reportRoute)
+app.use('/auth', auth);
+app.use('/dashboard', reportRoute);
+app.use('/userinfo', userInfo);
 
 app.use( (req,res, next) =>{
    let err = new Error("Not Found");
