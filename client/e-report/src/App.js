@@ -7,6 +7,8 @@ import UserDashboard from "./components/UserDashboard";
 import AdminDashboard from "./components/AdminDashboard";
 import LandingPage from "./components/LandingPage";
 import NoMatchPage from "./components/NoMatchPage";
+import Support from "./components/Support";
+import Settings from "./components/Settings";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -77,6 +79,8 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={LandingPage} />
+        <Route path="/support" component={Support} />
+        <Route path="/settings" component={Settings} />
         <Route
           exact
           path="/userlogin"
@@ -139,6 +143,7 @@ function App() {
 
 
         <Route component={NoMatchPage} />
+       
       </Switch>
 
 
