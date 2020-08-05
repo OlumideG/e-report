@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css';
+import '../../App.css';
 
 
 
@@ -22,7 +22,8 @@ const Cards = ({ info, index }) =>
 
 const LatestReports =()=>{
 const [search, setSearch] = useState("");
-const[numberOfReports, setNumberOfReports] = useState(Number)
+// const[numberOfReports, setNumberOfReports] = useState(Number)
+const[numberOfReports, setNumberOfReports] = useState(0)
 const[latestReport, setLatestReport] = useState([
                    {
     category: "",
@@ -92,8 +93,11 @@ return(
 
                         <div>
                           <div>Number of latest reports found is {numberOfReports} in {search}</div>
+                    
                         {
 
+                        numberOfReports < 1 ? 
+                        <div> Nothing Here</div> :
                         latestReport.map((info, index) => (
                       <Cards
                         key={index}
@@ -102,6 +106,7 @@ return(
                         
                     />
                 ))}
+                
                         </div>
     </div>
 )

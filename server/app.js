@@ -6,6 +6,7 @@ const cors = require("cors");
 const reportRoute = require('./routes/reportRoute');
 const auth = require('./routes/auth');
 const userInfo = require('./routes/userInfo');
+const chart = require('./routes/chart');
 
 
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(morgan("tiny"));
 
 app.use('/auth', auth);
 app.use('/dashboard', reportRoute);
+app.use('/graphes', chart);
 app.use('/userinfo', userInfo);
 
 app.use( (req,res, next) =>{

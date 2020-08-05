@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../src/Logo.svg';
+import logo from '../../../src/Logo.svg';
 import { Link , useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
 

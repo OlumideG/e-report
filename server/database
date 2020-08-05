@@ -30,20 +30,11 @@ CREATE TABLE thereports (
      localgovernment TEXT NOT NULL,
 	   imageurl TEXT,
       privatereport BOOLEAN DEFAULT FALSE NOT NULL,
-      status TEXT DEFAULT "pending" NOT NULL,
+      status TEXT DEFAULT 'pending' NOT NULL,
     	user_id INTEGER,
-    FOREIGN KEY(user_id) REFERENCES users(user_id)
+      date TEXT NOT NULL,
+      time TEXT NOT NULL,
+     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
-
-
-CREATE TABLE thereports1 (
-    id SERIAL PRIMARY KEY,
-    category TEXT NOT NULL,
-    address TEXT NOT NULL,
-    details TEXT NOT NULL,
-	imageurl TEXT,
-    user_id INTEGER REFERENCES users(user_id)
-  
-);
 

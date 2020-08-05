@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import logo from '../../src/Logo.svg';
+import logo from '../../../src/Logo.svg';
 import { Link , useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
-import Particles from 'react-particles-js';
-import  {particlesOptions} from "./particles";
 
 
 
@@ -95,10 +93,6 @@ function AdminLogin({ setAdminAuth }) {
        
         </form>
       </div>
-
-      <Particles className='particles'
-              params={particlesOptions}
-            />
 
     </div>
   );

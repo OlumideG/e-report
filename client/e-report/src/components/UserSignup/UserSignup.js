@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import logo from '../../src/Logo.svg';
+import logo from '../../../src/Logo.svg';
 import { Link , useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
+
 
 
 
@@ -29,6 +30,7 @@ function UserSignup({ setAuth }) {
     e.preventDefault();
     try {
       const body = { email, password, firstname, lastname };
+      console.log(body, "body of signup");
       const response = await fetch(
         "http://localhost:3000/auth/usersignup",
         {
