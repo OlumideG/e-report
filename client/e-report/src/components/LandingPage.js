@@ -9,7 +9,7 @@ const LandingPage = () => {
     return (
         <div>
            {/* <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}> */}
-           <nav className="navbar navbar-light" style={{ backgroundColor: "#122233" }}>
+           <nav className="navbar navbar-light" style={{ backgroundColor: "#122233", position: "fixed" }}>
                 <img src={logo} alt="Logo" />
                 <Link to="/userlogin" style={{ color:"white", fontSize:"25px" }}>Log in</Link>
                 <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>Admin Login</Link>

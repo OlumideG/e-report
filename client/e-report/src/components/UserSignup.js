@@ -58,7 +58,7 @@ function UserSignup({ setAuth }) {
 
     return (
         <div style={{fontFamily:"Open Sans", fontStyle: "normal",fontWeight: "normal"}}>
-            <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
+            <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D", position: "fixed" }}>
                 <img src={logo} alt="Logo"  onClick={landingPage}/>
                 <Link to="/userlogin" style={{ color:"white", fontSize:"25px" }}>Log in</Link>
                 <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>Admin Login</Link>

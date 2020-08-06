@@ -9,6 +9,7 @@ import LandingPage from "./components/LandingPage";
 import NoMatchPage from "./components/NoMatchPage";
 import Support from "./components/Support";
 import Settings from "./components/Settings";
+import LatestReport from "./components/LatestReport";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -81,6 +82,7 @@ function App() {
         <Route exact path="/" component={LandingPage} />
         <Route path="/support" component={Support} />
         <Route path="/settings" component={Settings} />
+        <Route path="/latestreport" component={LatestReport} />
         <Route
           exact
           path="/userlogin"

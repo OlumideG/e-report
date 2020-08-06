@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Switch, Route, Link } from "react-router-dom";
 import logo from '../../src/Logo.svg';
-import { Modal } from "react-bootstrap";
+import { Modal, Button, card } from "react-bootstrap";
 // import { Card } from "react-bootstrap";
 import "./UserDashboard.css";
 import { toast } from "react-toastify";
@@ -12,45 +12,59 @@ import {MdSettings} from "react-icons/md";
 import { IoMdLogOut } from 'react-icons/io';
 import Support from './Support';
 import Settings from './Settings'
-// import LatestReports from './LatestReports';
+import LatestReport from './LatestReport';
 import '../App.css';
 
 
+const Accordion = ({ title, children }) => {
+  const [isOpen, setOpen] = useState(false);
+  return (
+    <div>
+      <div className="accordion-wrapper">
 
-// const SearchedReport =({ })=>{
-
-// }
-// const SearchedReport = props => {
-//   const { category, details, imageurl } = props;
-//   return (
-//     <>
-//       <div>
-//          <p>{category} </p>
-//          <p>{details} </p>
-//         <img src={imageurl} alt="reports" style={{ width: "500px", height: "50px" }} />
-//       </div>
-//       {/* <p>{name}</p> */}
-//     </>
-//   );
-// };
-
-const Cards = ({ info, index, deleteReport }) =>
-    <div className="todo">
-        <div className="card" style={{ width: "18rem" }}>
-
-            <div className="card-body">
-                <h5 className="card-title font-weight-bold text-uppercase form-font">{info.category} at {info.address}</h5>
-                <h5 className="card-title font-weight-bold text-uppercase form-font"> {info.localgovernment}</h5>
-                <p className="card-text"> {info.details} </p>
-                <img className="card-img-top" src={info.imageurl} alt="" style={{ width: "200px", height: "150px" }} />
-                <div className="edit-delete">
-                    <button ><i className="fa fa-pencil-square-o fa-2x"></i></button>
-                    <button onClick={() => deleteReport(index)}> <i className="fa fa-trash fa-2x"></i></button>
-                </div>
-
-            </div>
+        <div
+          className={`accordion-title ${isOpen ? "open" : ""}`}
+          onClick={() => setOpen(!isOpen)}
+        >
+          {title}
         </div>
-    </div>;
+      </div>
+      <div className={`accordion-item ${!isOpen ? "collapsed" : ""}`}>
+        <div className="accordion-content">{children}</div>
+      </div>
+    </div>
+
+  );
+};
+
+
+const Cards = ({ info, index, deleteReport }) => (
+  <div className="todo">
+    <div className="wrapper" style={{ borderRadius: "10px", marginTop: "20px" }}>
+
+      <div className="card-body">
+        <h5 className="card-title font-weight-bold text-uppercase form-font">{info.category} at {info.address}</h5>
+        <h5 className="card-title font-weight-bold text-uppercase form-font"> {info.localgovernment}</h5>
+        <button className="editbutton" style={{ fontSize: "14px", position: "relative",  bottom: "60px", left: "750px"}}>Edit</button>
+        <button className="delbutton" style={{ fontSize: "14px", position: "relative",  bottom: "60px", left: "790px"}} onClick={() => deleteReport(index)}> <i className="fa fa-trash fa-1.5x"></i></button>
+        <div>
+          <Accordion title="View details">
+            <div className="myview" style={{backgroundColor: "white", padding: "10px", borderTop: "4px solid rgba(0, 0, 0, 0.25)"}}>
+              {/* <h5>{info.category}</h5>
+              <h5>{info.localgovernment}</h5> */}
+              <div>
+              <p>{info.details}</p>
+              </div>
+              <div>
+              <img className="card-img" src={info.imageurl} alt="" style={{ width: "300px", height: "200px" }} />
+              </div>             
+            </div>
+          </Accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+)
 
 
 const User = ({ info, index }) =>
@@ -153,8 +167,8 @@ function ReportForm({ addReport }) {
       <div>
         {/*modal-button */} {/*I remove the modal-button class from the button */}
         <div className="">
-          <button onClick={() => setButton(true)} className="modal-button">
-            <i className=" space-icon fa fa-plus"></i>Add new report
+          <button style ={{backgroundColor:" #27496D", color: "white", fontSize: "18px", borderRadius: "5px", width:"200px"}} onClick={() => setButton(true)} className="modal-button">
+            <i className=" space-icon fa fa-plus"></i>Create new report
           </button>
         </div>
         <form className=" form-font form-inline" action="">
@@ -438,18 +452,7 @@ function UserDashboard({ setAuth }) {
         );
     }, [search, reports]);
 
-    //   if (loading) {
-    //     return <p>Loading reports...</p>;
-    //   }
-
-
-
-
-
-
-
-
-
+    
     const addReport = report => {
         const newReports = [...reports, report];
         setReports(newReports)
@@ -468,7 +471,7 @@ function UserDashboard({ setAuth }) {
       <div className="user-dashboard">
         <nav
           className="navbar navbar-light"
-          style={{ backgroundColor: "#27496D" }}
+          style={{ backgroundColor: "#27496D", position: "fixed"}}
         >
           <img src={logo} alt="Logo" onClick={landingPage} />
           <div style={{ display: "flex" }}>
@@ -484,35 +487,35 @@ function UserDashboard({ setAuth }) {
             <div className="sidebar">
               <ul className="sidebar-list">
                 <div className="home-container">
-                 <Link to="/userdashboard"> <button className="home-text">
-                  <FaHome className="home-icon"/>
-                 <span className="home-te">Home</span></button>
+                  <Link to="/userdashboard"> <button className="home-text">
+                    <FaHome className="home-icon" />
+                    <span className="home-te">Home</span></button>
                   </Link>
                 </div>
 
                 <div className="support-container">
-                <Link to="/support">
-                  <button className="support-text">
-                  <MdSettings className="support-icon"/>
-                     <span className="support-te"> support</span>
-                  </button>
+                  <Link to="/support">
+                    <button className="support-text">
+                      <MdSettings className="support-icon" />
+                      <span className="support-te"> support</span>
+                    </button>
                   </Link>
                 </div>
-               
+
                 <div className="setting-container">
                   <Link to="/settings">
-                  <button className="setting-text">
-                    <GrSupport className="setting-icon"/>
-                    <span class="setting-te">settings</span>
-                  </button>
+                    <button className="setting-text">
+                      <GrSupport className="setting-icon" />
+                      <span class="setting-te">settings</span>
+                    </button>
                   </Link>
                 </div>
 
                 <div className="logout-container">
                   <button className="logout-text">
-                <IoMdLogOut className="logout-icon"/>
-                <span className="logout-te"> Log out</span>
-               </button>
+                    <IoMdLogOut className="logout-icon" />
+                    <span className="logout-te"> Log out</span>
+                  </button>
                 </div>
               </ul>
             </div>
@@ -536,22 +539,23 @@ function UserDashboard({ setAuth }) {
                   </div>
                 </div>
 
-                <div>
+                <div className="this">
                   <div className="search-date">
                     <div className="date">
-                        <h6 className="date-text">Thursday 21 May 2020</h6>
+                      <h6 className="date-text">Thursday 21 May 2020</h6>
                     </div>
 
-                  <div className="search-form">
-                  <form className="form-inline my-2 my-lg-0">
-                    <input
-                      className="form-control mr-sm-2"
-                      type="search"
-                      placeholder="Search all reports"
-                      onChange={(e) => setSearch(e.target.value)}
-                    />
-                    {/* <button className="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button> */}
-                  </form>
+                    <div className="search-form">
+                      <form className="form-inline my-2 my-lg-0">
+                        <input
+                          className="form-control mr-sm-2"
+                          style={{backgroundColor: "#f8f5f5"}}
+                          type="search"
+                          placeholder="Search all reports"
+                          onChange={(e) => setSearch(e.target.value)}
+                        />
+                        <button style={{backgroundColor: "#27496D", color: "white", marginLeft: "-10px"}} className="btn btn-outline-dark my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -560,25 +564,25 @@ function UserDashboard({ setAuth }) {
               <div className="part-2">
                 <div className="history-container">
                   <button className="history-text">History</button>
-                </div>  
+                </div>
 
-                  <div className="nearby-reports">
-                      <button className="nearby-reports-text">Latest nearby reports</button>
-                  </div>
+                <div className="nearby-reports">
+                  <Link to="/latestreport" className="nearby-reports-text">Latest nearby reports</Link>
+                </div>
               </div>
 
               <div className="part-3">
-                  <div className="all-report">
-                      <button className="all-report-text">All</button>
-                  </div>
+                <div className="all-report">
+                  <button className="all-report-text">All</button>
+                </div>
 
-                  <div className="forwarded-cases">
-                        <button className="forwarded-text">Forwarded</button>
-                  </div>
+                <div className="forwarded-cases">
+                  <button className="forwarded-text">Forwarded</button>
+                </div>
 
-                  <div className="pending">
-                        <button className="pending-text">Pending</button>
-                  </div>
+                <div className="pending">
+                  <button className="pending-text">Pending</button>
+                </div>
               </div>
 
               <div className="todo-list">
