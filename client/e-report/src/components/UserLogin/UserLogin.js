@@ -56,7 +56,7 @@ function UserLogin({ setAuth }) {
       <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}>
         <img src={logo} alt="Logo" onClick={landingPage} />
         <Link to="/usersignup" style={{ color: "white", fontSize: "25px" }}>Sign up</Link>
-        <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>Admin Login</Link>
+        {/* <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>Admin Login</Link> */}
       </nav>
 
 
@@ -113,6 +113,9 @@ function UserLogin({ setAuth }) {
         </div>
         <div>
           <Link to="/"><h4>Terms of Service</h4></Link>
+        </div>
+        <div>
+          <Link to="/adminlogin"><h4>Admin</h4></Link>
         </div>
       </div>
 

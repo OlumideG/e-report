@@ -33,6 +33,10 @@ const authorize = require("../middleware/authorize");
 //     }
 // })
 
+
+
+
+// GET request that displays all reports for the Admin Accounts
 router.get("/admin/home", async (req, res, next) => {
   try {
       const personalReport = await db.query("SELECT * FROM thereports ORDER BY id DESC")
@@ -45,6 +49,7 @@ router.get("/admin/home", async (req, res, next) => {
 })
 
 
+// GET request that displays all public reports for users 
 router.get("/home/public/:id", async (req, res, next) => {
     try {
         const result = await db.query("SELECT * FROM thereports WHERE privatereport = false AND user_id = $1" , [req.params.id]);
@@ -56,6 +61,7 @@ router.get("/home/public/:id", async (req, res, next) => {
 })
 
 
+// GET request that displays latest reports that are public and have been forwarded by the admin account
 router.get("/home/latest/:id", async (req, res, next) => {
   try {
       const result = await db.query("SELECT * FROM thereports WHERE privatereport = false AND status = 'forwarded' AND localgovernment = $1 ORDER BY id DESC LIMIT 10",[req.params.id]);
@@ -66,7 +72,7 @@ router.get("/home/latest/:id", async (req, res, next) => {
   }
 })
 
-
+// GET request that displays all forwarded reports on the user dashboard 
 router.get("/home/forwarded/:id", async (req, res, next) => {
   try {
       const result = await db.query("SELECT * FROM thereports WHERE status = 'forwarded' AND user_id = $1 ORDER BY id DESC",[req.params.id]);
@@ -77,6 +83,8 @@ router.get("/home/forwarded/:id", async (req, res, next) => {
   }
 })
 
+
+// GET request that displays all pending reports on the user dashboard 
 router.get("/home/pending/:id", async (req, res, next) => {
   try {
       const result = await db.query("SELECT * FROM thereports WHERE status = 'pending' AND user_id = $1 ORDER BY id DESC",[req.params.id]);
@@ -89,10 +97,9 @@ router.get("/home/pending/:id", async (req, res, next) => {
 
 
 
-
+// GET request that displays all reports on the user dashboard for each user
 router.get("/home/:id", async (req, res, next) => {
     try {
-        // const { id } = req.params
         const personalReport = await db.query("SELECT * FROM thereports WHERE user_id = $1 ORDER BY id DESC", [req.params.id])
         res.json(personalReport.rows)
         console.log(personalReport.rows)
@@ -116,6 +123,8 @@ router.get("/date", async (req, res, next) => {
 
 })
 
+
+// POST request that inserts reports into the database for the users 
 router.post("/home", async (req, res, next) => {
     try {
         const postReq = await db.query("INSERT INTO thereports (category, address, details, imageurl, user_id, localgovernment,privatereport,date,time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)", [req.body.category, req.body.address, req.body.details, req.body.imageUrl, req.body.user_id, req.body.localgovernment, req.body.privatereport, req.body.date, req.body.time])
@@ -138,7 +147,8 @@ router.post("/home", async (req, res, next) => {
 //     }
   // });
 
-
+  
+// PATCH request that allows the admin user to forward reports 
   router.patch("/forwarded/:id", async(req, res, next) => {
     try {
       const result = await db.query(
@@ -152,7 +162,7 @@ router.post("/home", async (req, res, next) => {
   });
 
 
-
+// DELETE request that allows both users and admin to delete reports
 router.delete("/home/:id", async(req, res, next) => {
     try {
         const { id } = req.params

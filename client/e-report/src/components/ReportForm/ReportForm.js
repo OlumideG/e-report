@@ -116,6 +116,7 @@ function ReportForm({ addReport }) {
                     <Modal.Body>
                         <label htmlFor="category">Choose a report category</label>
                         <select className="custom-select my-1 mr-sm-2" value={report.category} onChange={(e) => setReport({ ...report, category: e.target.value })}>
+                            <option disabled ={true} value="">Category type</option>
                             <option value="fire accident">Fire Accident</option>
                             <option value="road accident">Road Accident</option>
                             <option value="armed robbery">Armed Robbery</option>
@@ -129,6 +130,7 @@ function ReportForm({ addReport }) {
                         </div>
                         <label htmlFor="category">Select Local Government</label>
                         <select className="custom-select my-1 mr-sm-2" value={report.localgovernment} onChange={(e) => setReport({ ...report, localgovernment: e.target.value })}>
+                           <option disabled ={true} value="">Select Local Government</option>
                             <option value="Agege">Agege</option>
                             <option value="ajeromi-Ifelodun">Ajeromi-Ifelodun</option>
                             <option value="alimosho">Alimosho</option>

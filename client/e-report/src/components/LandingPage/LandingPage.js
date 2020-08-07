@@ -15,9 +15,9 @@ const LandingPage = () => {
         <Link to="/userlogin" style={{ color: "white", fontSize: "25px" }}>
           Log in
         </Link>
-        <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>
+        {/* <Link to="/adminlogin" style={{ color: "white", fontSize: "25px" }}>
           Admin Login
-        </Link>
+        </Link> */}
       </nav>
       
       
@@ -96,7 +96,7 @@ const LandingPage = () => {
                 </div>
 
                 <div className="access">
-                  <p>Accessibility</p>
+                 <Link to="/adminlogin"style={{ color: "white" }} ><p>Admin</p> </Link>  
                 </div>
                 </div>    
                 

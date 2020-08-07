@@ -43,7 +43,7 @@ function UserDashboard({ setAuth }) {
     ])
 
      const currDate = new Date().toLocaleDateString('en', { year: 'numeric', month: 'long', day: '2-digit' });
-     const currTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    //  const currTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
 
     useEffect(() => {
@@ -139,8 +139,7 @@ function UserDashboard({ setAuth }) {
         newReports.splice(index, 1);
         setReports(newReports);
 
-        console.log("deleted");
-        const reportNumber = `${info.id}`
+        const reportNumber = info.id
         console.log(index)
         console.log(reportNumber)
         fetch(`http://localhost:3000/dashboard/home/${reportNumber}`, {
@@ -303,12 +302,12 @@ function UserDashboard({ setAuth }) {
                                 </div>
                             </div>
 
-                            <div>
+                            <div className="this">
                                 <div className="search-date">
                                     <div className="date">
                                         {/* <h6 className="date-text">Thursday 21 May 2020</h6> */}
                                       <h6 className="date-text">Current Date: {currDate}</h6>
-                                      <h6 className="date-text">Current Time: {currTime}</h6>
+                                      {/* <h6 className="date-text">Current Time: {currTime}</h6> */}
                                     </div>
 
                                     <div className={showLatest ? "hide": "search-form"}>

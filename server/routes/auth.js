@@ -44,7 +44,7 @@ const authorize = require("../middleware/authorize");
 
 
 
-
+// POST request that that allows the user sign up
 router.post("/usersignup", validInfo, async (req, res) => {
   const { email, firstname, lastname, password } = req.body;
 
@@ -78,6 +78,9 @@ router.post("/usersignup", validInfo, async (req, res) => {
   }
 });
 
+
+
+// POST request that that allows the user login
 router.post("/userlogin", validInfo, async (req, res) => {
   const { email, password  } = req.body;
 
@@ -111,7 +114,7 @@ router.post("/userlogin", validInfo, async (req, res) => {
 
 
 
-
+// POST request that that allows the admin user sign up
 router.post("/adminsignup", validInfo, async (req, res) => {
     const { email, firstname, lastname, password } = req.body;
   
@@ -143,7 +146,7 @@ router.post("/adminsignup", validInfo, async (req, res) => {
 
 
 
-
+// POST request that that allows the admin user login
 router.post("/adminlogin", validInfo, async (req, res) => {
     const { email, password } = req.body;
   
