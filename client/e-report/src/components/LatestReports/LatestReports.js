@@ -81,6 +81,7 @@ const LatestReports = () => {
     const [search, setSearch] = useState("");
     // const[numberOfReports, setNumberOfReports] = useState(Number)
     const [numberOfReports, setNumberOfReports] = useState(0)
+    const [loading, setLoading] = useState(false);
     const [latestReport, setLatestReport] = useState([
         {
             category: "",
@@ -106,12 +107,14 @@ const LatestReports = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(search)
+       
+         setLoading(false);
 
         await fetch(`http://localhost:3000/dashboard/home/latest/${search}`)
             .then(response => response.json())
             .then(result => {
                 setLatestReport(result)
-                // setLoading(false);
+                setLoading(true);
                 //  console.log(result)
                 setNumberOfReports(result.length)
             })
@@ -155,12 +158,13 @@ const LatestReports = () => {
             </div>
 
             <div>
-                <div>Number of latest reports found is {numberOfReports} in {search}</div>
+                <div className={loading ? "" : "hide"} >Number of latest reports found is {numberOfReports} in {search}</div>
 
                 {
 
                     numberOfReports < 1 ?
                         <div> Nothing Here</div> :
+                        // <div>Number of latest reports found is {numberOfReports} in {search}</div> &&
                         latestReport.map((info, index) => (
                             <UserReportCards
                                 key={index}

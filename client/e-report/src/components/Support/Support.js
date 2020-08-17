@@ -9,6 +9,7 @@ import { RiProfileLine } from 'react-icons/ri';
 import { IoMdLogOut } from 'react-icons/io';
 import '../../App.css';
 
+
 const Support = ({ setAuth }) => {
 
   let history = useHistory();
@@ -96,7 +97,7 @@ const Support = ({ setAuth }) => {
             </ul>
           </div>
 
-          <div className="">
+          <div className="space">
             <div>
               <h1>Keep claim. We will upload the Support very soon</h1>
             </div>

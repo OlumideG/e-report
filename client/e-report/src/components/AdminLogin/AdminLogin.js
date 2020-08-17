@@ -58,7 +58,7 @@ function AdminLogin({ setAdminAuth }) {
       {/* <nav className="navbar navbar-light" style={{ backgroundColor: "#27496D" }}> */}
       <nav className="navbar navbar-light" style={{ backgroundColor: "#122233" }}>
         <img src={logo} alt="Logo" onClick={landingPage} />
-        <Link to="/usersignup" style={{ color: "white", fontSize: "25px" }}>Create a Reports account with us </Link>
+        {/* <Link to="/usersignup" style={{ color: "white", fontSize: "25px" }}>Create a Reports account with us </Link> */}
         <Link to="/userlogin" style={{ color: "white", fontSize: "25px" }}>User Login</Link>
       </nav>
 

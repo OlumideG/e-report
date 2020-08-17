@@ -54,9 +54,17 @@ function ReportForm({ addReport }) {
         const { user } = decode(localStorage.token)
         if (report.address.length === 0 && report.category.length === 0 && report.localgovernment.length === 0) {
             console.log("PLEASE FILL THE MESSAGE BOX")
-            alert('Please fill the form properly')
+            // alert('Please fill the form properly')
+            toast.info('Please fill the form properly ',{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose:false
+            })
         } else if (report.imageurl.length === 0) {
-            alert("WAIT!! PICTURE IS LOADING INTO OUR DATABASE")
+            // alert("WAIT!! PICTURE IS LOADING INTO OUR DATABASE")
+            toast.info('WAIT!! ADD IMAGE OR PICTURE IS LOADING INTO OUR DATABASE ',{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose:false
+            })
         } else {
             try {
                 const reportPosting = {

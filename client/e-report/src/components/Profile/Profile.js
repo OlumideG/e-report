@@ -9,13 +9,14 @@ import { MdSettings } from "react-icons/md";
 import { IoMdLogOut } from 'react-icons/io';
 import decode from 'jwt-decode';
 import '../../App.css';
+import '../UserDashboard/UserDashboard.css';
 
 
 
 const User = ({ info, index }) =>
     <div>
         <div className="welcome-user">
-            <h1 className="welcome-user-text">Name: {info.first_name} {info.last_name}</h1>
+            <h1 className="welcome-user-text capital-letter">Name: {info.first_name} {info.last_name}</h1>
             <h1 className="welcome-user-text">Email: {info.user_email}</h1>
         </div>
     </div>
@@ -147,7 +148,7 @@ const Profile = ({ setAuth }) => {
                         </ul>
                     </div>
 
-                    <div className="">
+                    <div className="space">
                         {
                             name.map((info, index) => (
                                 <User

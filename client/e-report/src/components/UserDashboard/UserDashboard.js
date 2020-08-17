@@ -21,7 +21,7 @@ import "./UserDashboard.css";
 const User = ({ info, index }) =>
     <div>
         <div className="welcome-user">
-            <h1 className="welcome-user-text">Welcome {info.first_name} {info.last_name}</h1>
+            <h1 className="welcome-user-text capital-letter">Welcome {info.first_name} {info.last_name}</h1>
         </div>
     </div>
 
@@ -34,8 +34,10 @@ function UserDashboard({ setAuth }) {
     const [search, setSearch] = useState("");
     const [filteredReports, setFilteredReports] = useState([]);
     const [reports, setReports] = useState([])
-    const [showLatest, setShowLatest] = React.useState(false);
-    const [showHistory, setShowHistory] = React.useState(true);
+    const [showLatest, setShowLatest] = useState(false);
+    const [showHistory, setShowHistory] = useState(true);
+    const [pendingColor, setPendingColor] = useState(false);
+
 
     const [name, setName] = useState([
         { first_name: "" },
@@ -158,6 +160,7 @@ function UserDashboard({ setAuth }) {
         .then(res => res.json())
         .then(result => {
             setReports(result)
+            setPendingColor(false)
             // setLoading(false);
             console.log(result)
         })
@@ -171,11 +174,12 @@ function UserDashboard({ setAuth }) {
 
     const pendingReports =()=>{
         const { user } = decode(localStorage.token);
-      
+        
         fetch(`http://localhost:3000/dashboard/home/pending/${user}`)
         .then(res => res.json())
         .then(result => {
             setReports(result)
+            setPendingColor(true)
             // setLoading(false);
             console.log(result)
         })
@@ -194,6 +198,7 @@ function UserDashboard({ setAuth }) {
         .then(res => res.json())
         .then(result => {
             setReports(result)
+            setPendingColor(false)
             // setLoading(false);
             console.log(result)
         })
@@ -206,8 +211,8 @@ function UserDashboard({ setAuth }) {
     }
 
     const latestReportsButton =() =>{
-      setShowLatest(true)
-      setShowHistory(false)
+      setShowLatest(!showLatest)
+      setShowHistory(!showHistory)
     }
 
     const historyReportsButton =() =>{
@@ -306,7 +311,7 @@ function UserDashboard({ setAuth }) {
                                 <div className="search-date">
                                     <div className="date">
                                         {/* <h6 className="date-text">Thursday 21 May 2020</h6> */}
-                                      <h6 className="date-text">Current Date: {currDate}</h6>
+                                      <h6 className="date-text"> {currDate}</h6>
                                       {/* <h6 className="date-text">Current Time: {currTime}</h6> */}
                                     </div>
 
@@ -336,7 +341,7 @@ function UserDashboard({ setAuth }) {
                         </div>
 
                         {/* <div className="part-3"> */}
-                        <div className={!showHistory || reports.length === 0 ? "hide": "part-3"}>
+                        <div className={!showHistory  ? "hide": "part-3"}>
                             <div className="all-report">
                                 <button className="all-report-text" onClick={allReports}>All</button>
                             </div>
@@ -347,6 +352,7 @@ function UserDashboard({ setAuth }) {
 
                             <div className="pending">
                                 <button className="pending-text" onClick={pendingReports}>Pending</button>
+
                             </div>
                         </div>
                         {/* <div className="todo-list"> */}
@@ -355,7 +361,8 @@ function UserDashboard({ setAuth }) {
                                 reports === 0 ?
                                     <div> Nothing Here</div> 
                                     : filteredReports.map((info, index) => (
-                                        <UserReportCards
+                                         <UserReportCards
+                                           pendingColor={pendingColor}
                                             key={index}
                                             index={index}
                                             {...info}

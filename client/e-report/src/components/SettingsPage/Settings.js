@@ -95,7 +95,7 @@ const Settings = () => {
             </ul>
           </div>
 
-          <div className="">
+          <div className="space">
             <div>
               <h1>The Settings is coming soon. Keep your fingers cross.</h1>
             </div>

@@ -53,11 +53,16 @@
     border: none;
 }
 
-.todo-list {
+/* .todo-list{
+    display: flex;
+    flex-direction: column;
+} */
 
-    display: block;
+/* .todo-list { */
+
+    /* display: block;
     margin-top: 90px;
-    border-radius: 4px;
+    border-radius: 4px; */
 
 
     /* background: #e8e8e8; */
@@ -73,7 +78,7 @@
     /* align-items: flex-start;
     flex-wrap: wrap;
     height: 100%; */
-}
+/* } */
 
 
 .todo-list-admin {
@@ -137,6 +142,12 @@
     display: flex;
 }
 
+/* .card-body-red {
+    background: rgba(196, 196, 196, 0.35);
+    border-left: 10px solid red;
+    border-radius: 10px;
+   
+} */
 
 .card-body {
     background: rgba(196, 196, 196, 0.35);
@@ -144,29 +155,55 @@
     border-radius: 10px;
 }
 
-.card-body .card-title {
+.card-yellow{
+    border-left: 10px solid yellow;  
+}
+
+
+
+
+
+
+
+.card-body .card-title  {
     font-size: 15px;
 }
 
-.card-body .card-text {
+.card-body .card-text  {
     font-size: 12.8px;
 }
 
-.card-body .card-img-top {
+.card-body .card-img-top  {
     margin: 40px 40px;
 }
+
 
 .time-card{
     margin-right:30px;
 }
 
-.card-img {
+/* .card-img {
   display: block;
   margin-left: 10px;
-  /* margin-right: auto; */
+  margin-right: auto;
   width: 40%;
  
-}
+} */
+
+
+.card-img {
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%; */
+    position: relative;
+    top: -17px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+  }
+  
 
 
 .dashboard-content {
@@ -312,17 +349,23 @@
 
 .welcome-user {
     display: flex;
-    flex-direction: row;
-    width: 200px;
-    margin-top: 5px;
+    flex-direction: column;
+    /* flex-direction: row; */
+    /* width: 200px; */
+    margin-top: 20px;
 }
 
 .welcome-user-text {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: bold;
+
     font-size: 25px;
     line-height: 34px;
+}
+
+.capital-letter{
+    text-transform: uppercase;
 }
 
 .date {
@@ -591,4 +634,9 @@
   
   .delbutton:hover {
       color: red;
+  }
+
+
+  .space{
+      margin-left: 400px;
   }
