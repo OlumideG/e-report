@@ -41,7 +41,43 @@ router.get("/admin/home", async (req, res, next) => {
   try {
       const personalReport = await db.query("SELECT * FROM thereports ORDER BY id DESC")
       res.json(personalReport.rows)
-      console.log(personalReport.rows)
+      // console.log(personalReport.rows)
+  } catch (error) {
+      next(error)
+  }
+
+})
+
+// GET request that displays number of all pending reports for the Admin Accounts
+router.get("/admin/home/pending", async (req, res, next) => {
+  try {
+      const pendingReports = await db.query("SELECT * FROM thereports WHERE status = 'pending' ORDER BY id DESC")
+      res.json(pendingReports.rows)
+      // console.log(personalReport.rows)
+  } catch (error) {
+      next(error)
+  }
+
+})
+
+// GET request that displays number of all pending reports for the Admin Accounts
+router.get("/admin/home/forwarded", async (req, res, next) => {
+  try {
+      const forwardedReports = await db.query("SELECT * FROM thereports WHERE status = 'forwarded' ORDER BY id DESC")
+      res.json(forwardedReports.rows)
+      // console.log(personalReport.rows)
+  } catch (error) {
+      next(error)
+  }
+
+})
+
+// GET request that displays number of all private reports for the Admin Accounts
+router.get("/admin/home/private", async (req, res, next) => {
+  try {
+      const forwardedReports = await db.query("SELECT * FROM thereports WHERE privatereport = true ORDER BY id DESC")
+      res.json(forwardedReports.rows)
+      // console.log(personalReport.rows)
   } catch (error) {
       next(error)
   }

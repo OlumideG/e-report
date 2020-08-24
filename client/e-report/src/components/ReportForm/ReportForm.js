@@ -166,8 +166,8 @@ function ReportForm({ addReport }) {
                             <label htmlFor="image">Add image</label>
                             <input type="file" className="form-control-file" name="file" onChange={uploadImage} />
                         </div>
-                        <h5>Private report</h5>
-                        <input type="checkbox" name="checkbox" value={report.privatereport} onChange={handlePrivateReport} />
+                        <h6><input type="checkbox" name="checkbox" value={report.privatereport} onChange={handlePrivateReport} />  Mark as private report</h6>
+                        {/* <input type="checkbox" name="checkbox" value={report.privatereport} onChange={handlePrivateReport} /> */}
                     </Modal.Body>
                     <Modal.Footer>
                         <button className="btn btn-primary" onClick={handleSubmit} >Save Report</button>

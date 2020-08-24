@@ -39,6 +39,7 @@ function UserDashboard({ setAuth }) {
     const [pendingColor, setPendingColor] = useState(false);
 
 
+
     const [name, setName] = useState([
         { first_name: "" },
         { last_name: "" }
@@ -46,9 +47,27 @@ function UserDashboard({ setAuth }) {
 
      const currDate = new Date().toLocaleDateString('en', { year: 'numeric', month: 'long', day: '2-digit' });
     //  const currTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+ 
+    function getWeekDay(date){
+        //Create an array containing each day, starting with Sunday.
+        let weekdays = 
+           ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ] 
+        
+        //Use the getDay() method to get the day.
+        let day = date.getDay();
+        //Return the element that corresponds to that index.
+        return weekdays[day];
+    }
+    
+    let date = new Date();
+    let weekDay = getWeekDay(date);
 
+
+ 
+    
 
     useEffect(() => {
+      
 
 
         const { user } = decode(localStorage.token);
@@ -220,6 +239,9 @@ function UserDashboard({ setAuth }) {
         setShowHistory(true)
       }
 
+   
+  
+
 
    return (
         <div className="user-dashboard">
@@ -311,7 +333,7 @@ function UserDashboard({ setAuth }) {
                                 <div className="search-date">
                                     <div className="date">
                                         {/* <h6 className="date-text">Thursday 21 May 2020</h6> */}
-                                      <h6 className="date-text"> {currDate}</h6>
+                                      <h6 className="date-text"> {weekDay}, {currDate}</h6>
                                       {/* <h6 className="date-text">Current Time: {currTime}</h6> */}
                                     </div>
 
